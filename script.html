@@ -28,8 +28,9 @@
           var contentTop = content.position().top;
           //Is this element below toggleContent?
           if (contentTop > toggleContentTop) {
-            // var newTopValue = contentTop + sectionHeight;
+            var newTopValue = contentTop + sectionHeight;
             content.animate({top: "+=" + sectionHeight + "px"}, 600);
+            console.log('newTopValue', newTopValue)
             console.log('Moved ', content)
           }
         }
@@ -39,6 +40,7 @@
           return (height - sectionHeight);
         });
         shown = false;
+        console.log('Setting shown to false for ', setup_obj)
       } else {
         for (var i = 0; i < otherContent.length; i++) {
           var content = $(otherContent[i]);
@@ -49,6 +51,7 @@
           if (contentTop > toggleContentTop) {
             var newTopValue = content.position().top - sectionHeight;
             content.animate({top: "-=" + sectionHeight + "px"}, 600);
+            console.log('newTopValue', newTopValue)
           }
         }
         $("#lp-pom-root, #lp-pom-root-color-overlay").height(function (index, height) {
@@ -56,7 +59,7 @@
           return (height - sectionHeight);
         });
         shown = true;
-        console.log('Setting ' + setup_obj.section + ' shown to true')
+        console.log('Setting shown to true for ', setup_obj)
       }
     }
 
