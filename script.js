@@ -74,14 +74,14 @@ var store = [
   },
   {
     section: '#lp-pom-block-335',
-    content: '#lp-pom-box-329',
+    content: '#lp-pom-box-337',
     button: '#lp-pom-button-277'
   },
-  {
-    section: '#lp-pom-block-340', // todo update
-    content: '#lp-pom-box-330',
-    button: '#lp-pom-button-278'
-  }
+  // {
+  //   section: '#lp-pom-block-340', // todo update
+  //   content: '#lp-pom-box-330',
+  //   button: '#lp-pom-button-278'
+  // }
 ]
 
 store.forEach(function (setup_obj) {
