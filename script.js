@@ -10,6 +10,7 @@ var setup = function (setup_obj) {
 
   toggleSection.css("display", "none");
   toggleContent.css("display", "none");
+
   console.log('Set display:none; for ' + setup_obj.section + ' and ' + setup_obj.content)
 
   // var otherSections = toggleSection.nextAll();
@@ -27,11 +28,12 @@ var setup = function (setup_obj) {
         if (contentTop > toggleContentTop) {
           // var newTopValue = contentTop + sectionHeight;
           content.animate({top: "+=" + sectionHeight + "px"}, 600);
+          console.log('Moved ', content)
         }
       }
       // TODO perhaps change these?
       $("#lp-pom-root, #lp-pom-root-color-overlay").height(function (index, height) {
-        console.log('Shown, adjusting height to ' + (height - sectionHeight))
+        console.log(setup_obj.section + ' shown, adjusting height to ' + (height - sectionHeight))
         return (height - sectionHeight);
       });
       shown = false;
@@ -48,10 +50,11 @@ var setup = function (setup_obj) {
         }
       }
       $("#lp-pom-root, #lp-pom-root-color-overlay").height(function (index, height) {
-        console.log('Not shown, adjusting height to ' + (height - sectionHeight))
+        console.log(setup_obj.section + ' not shown, adjusting height to ' + (height - sectionHeight))
         return (height - sectionHeight);
       });
       shown = true;
+      console.log('Setting ' + setup_obj.section + ' shown to true')
     }
   }
 
