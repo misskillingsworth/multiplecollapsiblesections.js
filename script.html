@@ -74,8 +74,6 @@
         for (var i = 0; i < otherContent.length; i++) {
           var content = $(otherContent[i]);
           var contentTop = content.position().top;
-          // console.log('content', content)
-          // console.log('contentTop', contentTop)
           //Is this element below toggleContent?
           if (contentTop > toggleContentTop) {
             var newTopValue = content.position().top - sectionHeight;
@@ -100,9 +98,14 @@
     moveStuff();
 
     var hide = function () {
-      toggleSection.slideToggle('fast');    // TODO can replace this with instant fade
-      toggleContent.slideToggle('fast');    // if desired
+      toggleSection.toggle();    // TODO can replace this with instant fade
+      toggleContent.toggle();    // if desired
       moveStuff();
+      // TODO add fast move function
+    }
+
+    if (!setup_obj.hide) {
+      setup_obj.hide = hide
     }
 
     var execute = function () { // ID of button/trigger
@@ -121,10 +124,6 @@
       console.log('Current _hidden array = ', _hidden)
     }
 
-    if (!setup_obj.execute || !setup_obj.hide) {
-      setup_obj.execute = execute
-      setup_obj.hide = hide
-    }
 
     toggleButton.click(execute);
 
