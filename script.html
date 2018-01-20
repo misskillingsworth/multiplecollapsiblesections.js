@@ -1,5 +1,26 @@
 <script>
 
+  var store = [
+    {
+      section: '#lp-pom-block-160',
+      content: '#lp-pom-box-322',
+      button: '#lp-pom-button-245'
+    },
+    {
+      section: '#lp-pom-block-335',
+      content: '#lp-pom-box-337',
+      button: '#lp-pom-button-277'
+    },
+    {
+      section: '#lp-pom-block-340', // todo update
+      content: '#lp-pom-box-342',
+      button: '#lp-pom-button-278'
+    }
+  ];
+
+  var _visible;
+  var _hidden;
+
   var setup = function (setup_obj) {
 
     console.log('Using setup_obj:', setup_obj)
@@ -15,9 +36,10 @@
 
     console.log('Set display:none; for ' + setup_obj.section + ' and ' + setup_obj.content)
 
-    // var otherSections = toggleSection.nextAll();
+    var otherSections = toggleSection.nextAll();
     var otherContent = toggleContent.siblings();
     console.log('otherContent', otherContent);
+    console.log('otherSections', otherSections);
 
     var shown = false;
 
@@ -70,27 +92,26 @@
       toggleSection.slideToggle('slow');
       toggleContent.slideToggle('slow');
       moveStuff();
+      if (!shown) {
+        updateStore(setup_obj.section)
+      }
     });
 
   }
 
-  var store = [
-    {
-      section: '#lp-pom-block-160',
-      content: '#lp-pom-box-322',
-      button: '#lp-pom-button-245'
-    },
-    {
-      section: '#lp-pom-block-335',
-      content: '#lp-pom-box-337',
-      button: '#lp-pom-button-277'
-    },
-    // {
-    //   section: '#lp-pom-block-340', // todo update
-    //   content: '#lp-pom-box-330',
-    //   button: '#lp-pom-button-278'
-    // }
-  ]
+  var updateStore = function (section_id) {
+    _visible = section_id
+    _hidden = [];
+
+    store.forEach(function (obj) {
+      if (obj.section !== _visible) {
+        _hidden.push(obj.section)
+      }
+    })
+
+    console.log('Current _visible section_id = ' + _visible)
+    console.log('Current _hidden array = ', _hidden)
+  }
 
   store.forEach(function (setup_obj) {
     setup(setup_obj)
