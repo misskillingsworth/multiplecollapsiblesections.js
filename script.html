@@ -1,176 +1,160 @@
-<script>
+<script type="text/javascript">
 
-  var _store = [
-    {
-      section: '#lp-pom-block-160',
-      content: '#lp-pom-box-322',
-      button: '#lp-pom-button-245'
-    },
-    {
-      section: '#lp-pom-block-335',
-      content: '#lp-pom-box-337',
-      button: '#lp-pom-button-277'
-    },
-    {
-      section: '#lp-pom-block-340',
-      content: '#lp-pom-box-342',
-      button: '#lp-pom-button-278'
-    }
-  ];
+  (function () { // Immediately invoked function enclosure
 
-  var _visible;
-  var _hidden;
-  var _toggleContentTop = $(_store[0].content).position().top
+    var _store = [
+      {
+        section: '#lp-pom-block-160',
+        content: '#lp-pom-box-322',
+        button: '#lp-pom-button-245'
+      },
+      {
+        section: '#lp-pom-block-335',
+        content: '#lp-pom-box-337',
+        button: '#lp-pom-button-277'
+      },
+      {
+        section: '#lp-pom-block-340',
+        content: '#lp-pom-box-342',
+        button: '#lp-pom-button-278'
+      }
+    ];
 
-  var setup = function (setup_obj) {
+    var _visible;
+    var _hidden;
+    var _toggleContentTop = $(_store[0].content).position().top;
 
-    console.log('Using setup_obj:', setup_obj)
-    var toggleSection = $(setup_obj.section);   // Replace with ID of your collapsible page section
-    var toggleContent = $(setup_obj.content);   // Replace with ID of box containing hidden/visible content
-    var toggleButton = $(setup_obj.button);     // Replace with ID of button that toggles section
+    var setup = function (setup_obj) {
 
-    var sectionHeight = $(toggleSection).height();  // Height of section to show/hide
-    var toggleContentTop = _toggleContentTop;       // Top value of content
-    // console.log('sectionHeight: '+ sectionHeight + ' vs. _store[0] version ' + _sectionHeight)
-    // console.log('toggleContentTop: '+ toggleContentTop + ' vs. _store[0] version ' + _toggleContentTop)
+      // console.log('Using setup_obj:', setup_obj);
+      var toggleSection = $(setup_obj.section);   // Replace with ID of your collapsible page section
+      var toggleContent = $(setup_obj.content);   // Replace with ID of box containing hidden/visible content
+      var toggleButton = $(setup_obj.button);     // Replace with ID of button that toggles section
 
-    toggleSection.css("display", "none");
-    toggleContent.css("display", "none");
+      var sectionHeight = $(toggleSection).height();  // Height of section to show/hide
+      var toggleContentTop = _toggleContentTop;       // Top value of content
 
-    console.log('Set display:none; for ' + setup_obj.section + ' and ' + setup_obj.content)
+      toggleSection.css("display", "none");
+      toggleContent.css("display", "none");
 
-    var otherSections = toggleSection.nextAll();
-    var otherContent = toggleContent.siblings();
-    console.log('otherSections', otherSections);
-    console.log('otherContent', otherContent);
+      // console.log('Set display:none; for ' + setup_obj.section + ' and ' + setup_obj.content)
 
-    var is_hidden = false;
+      // var otherSections = toggleSection.nextAll();
+      var otherContent = toggleContent.siblings();
+      // console.log('otherSections', otherSections);
+      // console.log('otherContent', otherContent);
 
-    var moveStuff = function (collapse = true) {
-      if (is_hidden) {
-        for (var i = 0; i < otherContent.length; i++) {
-          var content = $(otherContent[i]);
-          var contentTop = content.position().top;
-          //Is this element below toggleContent?
-          if (contentTop > toggleContentTop) {
-            // var newTopValue = contentTop + sectionHeight;
-            if (collapse) {
-              content.animate({top: "+=" + sectionHeight + "px"}, 600)
-            } else {
-              content.animate({top: "+=" + sectionHeight + "px"}, 10)
+      var is_hidden = false;
+
+      var moveStuff = function (collapse = true) {
+        if (is_hidden) {
+          for (var i = 0; i < otherContent.length; i++) {
+            var content = $(otherContent[i]);
+            var contentTop = content.position().top;
+            //Is this element below toggleContent?
+            if (contentTop > toggleContentTop) {
+              if (collapse) {
+                content.animate({top: "+=" + sectionHeight + "px"}, 600)
+              } else {
+                content.animate({top: "+=" + sectionHeight + "px"}, 10)
+              }
             }
           }
-        }
-        // TODO perhaps change these?
-        // $("#lp-pom-root, #lp-pom-root-color-overlay").height(function (index, height) {
-        //   console.log(setup_obj.section + ' shown, adjusting height to ' + (height - sectionHeight))
-        //   return (height - sectionHeight);
-        // });
-        is_hidden = false;
-        setup_obj.is_hidden = false;
-        console.log('Setting is_hidden to false for ', setup_obj)
-      } else {
-        for (var i = 0; i < otherContent.length; i++) {
-          var content = $(otherContent[i]);
-          var contentTop = content.position().top;
-          //Is this element below toggleContent?
-          if (contentTop > toggleContentTop) {
-            // var newTopValue = content.position().top - sectionHeight;
-            if (collapse) {
-              content.animate({top: "-=" + sectionHeight + "px"}, 600)
-            } else {
-              content.animate({top: "-=" + sectionHeight + "px"}, 10)
+          is_hidden = false;
+        } else {
+          for (var i = 0; i < otherContent.length; i++) {
+            var content = $(otherContent[i]);
+            var contentTop = content.position().top;
+            //Is this element below toggleContent?
+            if (contentTop > toggleContentTop) {
+              if (collapse) {
+                content.animate({top: "-=" + sectionHeight + "px"}, 600)
+              } else {
+                content.animate({top: "-=" + sectionHeight + "px"}, 10)
+              }
             }
           }
+          is_hidden = true;
         }
-        // $("#lp-pom-root, #lp-pom-root-color-overlay").height(function (index, height) {
-        //   console.log(setup_obj.section + ' not shown, adjusting height to ' + (height - sectionHeight))
-        //   return (height - sectionHeight);
-        // });
-        is_hidden = true;
-        setup_obj.is_hidden = true;
-        console.log('Setting is_hidden to true for ', setup_obj)
       }
-    }
 
-    //Run moveStuff to adjust content on load
-    moveStuff();
-
-    var hide = function () {
-      toggleSection.toggle();
-      toggleContent.toggle();
-      moveStuff(false);
-      // TODO add fast move function
-    }
-
-    if (!setup_obj.hide) {
-      setup_obj.hide = hide
-    }
-
-    var execute = function () { // ID of button/trigger
-      if (_visible && _visible !== setup_obj.section) {
-        hideCurrentlyVisible()
-      }
-      toggleSection.slideToggle('slow');
-      toggleContent.slideToggle('slow'); // todo maybe mess with this
+      //Run moveStuff to adjust content on load
       moveStuff();
-      if (!is_hidden) {
-        updateVisible(setup_obj.section)
-      } else {
-        updateHidden()
+
+      var hide = function () {
+        toggleSection.toggle();
+        toggleContent.toggle();
+        moveStuff(false);
       }
-      console.log('Current _visible section_id = ' + _visible)
-      console.log('Current _hidden array = ', _hidden)
+
+      if (!setup_obj.hide) {
+        setup_obj.hide = hide
+      }
+
+      var execute = function () { // ID of button/trigger
+        if (_visible && _visible !== setup_obj.section) {
+          hideCurrentlyVisible()
+        }
+        toggleSection.slideToggle('slow');
+        toggleContent.slideToggle('slow');
+        moveStuff();
+        if (!is_hidden) {
+          updateVisible(setup_obj.section)
+        } else {
+          updateHidden()
+        }
+        // console.log('Current _visible section_id = ' + _visible)
+        // console.log('Current _hidden array = ', _hidden)
+      }
+
+
+      toggleButton.click(execute);
+
     }
 
+    var hideCurrentlyVisible = function () {
+      if (_visible) {
+        var exec_func;
+        _store.forEach(function (obj) {
+          if (obj.section === _visible) {
+            exec_func = obj.hide
+          }
+        })
+        if (exec_func) {
+          exec_func();  // Will hide the currently visible section
+          updateHidden()
+        } else {
+          console.log('Error! Couldnt find exec function for ' + _visible)
+        }
 
-    toggleButton.click(execute);
+      }
+    }
 
-  }
-
-  var hideCurrentlyVisible = function () {
-    if (_visible) {
-      var exec_func;
+    /* Add all entries to hidden */
+    var updateHidden = function () {
+      _visible = null;
+      _hidden = [];
       _store.forEach(function (obj) {
-        if (obj.section === _visible) {
-          exec_func = obj.hide
+        _hidden.push(obj.section)
+      })
+    }
+
+    /* Add current section to _visible */
+    var updateVisible = function (section_id) {
+      _visible = section_id
+      _hidden = [];
+
+      _store.forEach(function (obj) {
+        if (obj.section !== _visible) {
+          _hidden.push(obj.section)
         }
       })
-      if (exec_func) {
-        exec_func(); // Will hide the currently visible pane
-        console.log('Hid section ' + _visible)
-        updateHidden()
-      } else {
-        console.log('Couldnt find exec func for ' + _visible)
-      }
-
     }
-  }
 
-  /* Add all entries to hidden */
-  var updateHidden = function () {
-    _visible = null;
-    _hidden = [];
-    _store.forEach(function (obj) {
-      _hidden.push(obj.section)
+    _store.forEach(function (setup_obj) {
+      setup(setup_obj)
     })
-  }
 
-  /* Add current section to _visible */
-  var updateVisible = function (section_id) {
-    _visible = section_id
-    _hidden = [];
-
-    _store.forEach(function (obj) {
-      if (obj.section !== _visible) {
-        _hidden.push(obj.section)
-      }
-    })
-  }
-
-  _store.forEach(function (setup_obj) {
-    setup(setup_obj)
-  })
-
+  })()  // Invoke IIFE
 
 </script>
