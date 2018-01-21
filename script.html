@@ -1,6 +1,6 @@
 <script>
 
-  _store = [
+  var _store = [
     {
       section: '#lp-pom-block-160',
       content: '#lp-pom-box-322',
@@ -46,27 +46,26 @@
 
     var is_hidden = false;
 
-    var moveStuff = function () {
+    var moveStuff = function (collapse = true) {
       if (is_hidden) {
         for (var i = 0; i < otherContent.length; i++) {
           var content = $(otherContent[i]);
           var contentTop = content.position().top;
           //Is this element below toggleContent?
           if (contentTop > toggleContentTop) {
-            var newTopValue = contentTop + sectionHeight;
-            content
-                .hide()
-                .animate({top: "+=" + sectionHeight + "px"}, 600)
-                .show()
-            // console.log('newTopValue', newTopValue)
-            // console.log('Moved ', content)
+            // var newTopValue = contentTop + sectionHeight;
+            if (collapse) {
+              content.animate({top: "+=" + sectionHeight + "px"}, 600)
+            } else {
+              content.animate({top: "+=" + sectionHeight + "px"}, 10)
+            }
           }
         }
         // TODO perhaps change these?
-        $("#lp-pom-root, #lp-pom-root-color-overlay").height(function (index, height) {
-          console.log(setup_obj.section + ' shown, adjusting height to ' + (height - sectionHeight))
-          return (height - sectionHeight);
-        });
+        // $("#lp-pom-root, #lp-pom-root-color-overlay").height(function (index, height) {
+        //   console.log(setup_obj.section + ' shown, adjusting height to ' + (height - sectionHeight))
+        //   return (height - sectionHeight);
+        // });
         is_hidden = false;
         setup_obj.is_hidden = false;
         console.log('Setting is_hidden to false for ', setup_obj)
@@ -76,18 +75,18 @@
           var contentTop = content.position().top;
           //Is this element below toggleContent?
           if (contentTop > toggleContentTop) {
-            var newTopValue = content.position().top - sectionHeight;
-            content
-                .hide()
-                .animate({top: "-=" + sectionHeight + "px"}, 600)
-                .show()
-            // console.log('newTopValue', newTopValue)
+            // var newTopValue = content.position().top - sectionHeight;
+            if (collapse) {
+              content.animate({top: "-=" + sectionHeight + "px"}, 600)
+            } else {
+              content.animate({top: "-=" + sectionHeight + "px"}, 10)
+            }
           }
         }
-        $("#lp-pom-root, #lp-pom-root-color-overlay").height(function (index, height) {
-          console.log(setup_obj.section + ' not shown, adjusting height to ' + (height - sectionHeight))
-          return (height - sectionHeight);
-        });
+        // $("#lp-pom-root, #lp-pom-root-color-overlay").height(function (index, height) {
+        //   console.log(setup_obj.section + ' not shown, adjusting height to ' + (height - sectionHeight))
+        //   return (height - sectionHeight);
+        // });
         is_hidden = true;
         setup_obj.is_hidden = true;
         console.log('Setting is_hidden to true for ', setup_obj)
@@ -98,9 +97,9 @@
     moveStuff();
 
     var hide = function () {
-      toggleSection.toggle();    // TODO can replace this with instant fade
-      toggleContent.toggle();    // if desired
-      moveStuff();
+      toggleSection.toggle();
+      toggleContent.toggle();
+      moveStuff(false);
       // TODO add fast move function
     }
 
@@ -113,7 +112,7 @@
         hideCurrentlyVisible()
       }
       toggleSection.slideToggle('slow');
-      toggleContent.slideToggle('slow');
+      toggleContent.slideToggle('slow'); // todo maybe mess with this
       moveStuff();
       if (!is_hidden) {
         updateVisible(setup_obj.section)
