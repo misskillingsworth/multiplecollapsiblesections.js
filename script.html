@@ -34,6 +34,7 @@
     var _visible;
     var _hidden;
     var _toggleContentTop = $(_store[0].content).position().top;
+    var _staticContent = $('#lp-pom-box-286');
 
     var setup = function (setup_obj) {
 
@@ -59,6 +60,7 @@
 
       var moveStuff = function (collapse = true) {
         if (is_hidden) {
+
           for (var i = 0; i < otherContent.length; i++) {
             console.log(otherContent[i])
             var content = $(otherContent[i]);
@@ -67,12 +69,14 @@
             if (contentTop > toggleContentTop) {
               if (collapse) {
                 content.animate({top: "+=" + sectionHeight + "px"}, 600)
-                $('#lp-pom-box-286').animate({top: "1950px"}, 10)   // Manually move the LMI blue box down
+                _staticContent.animate({top: "1950px"}, 10)   // Manually move the LMI blue box down to this position
+                // UPDATE ABOVE IF YOU CHANGE THE LENGTH OF THE DROPDOWN BOXES
               } else {
                 content.animate({top: "+=" + sectionHeight + "px"}, 10)
               }
             }
           }
+
           is_hidden = false;
         } else {
           for (var i = 0; i < otherContent.length; i++) {
