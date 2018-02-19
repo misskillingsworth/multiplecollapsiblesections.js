@@ -60,12 +60,14 @@
       var moveStuff = function (collapse = true) {
         if (is_hidden) {
           for (var i = 0; i < otherContent.length; i++) {
+            console.log(otherContent[i])
             var content = $(otherContent[i]);
             var contentTop = content.position().top;
             //Is this element below toggleContent?
             if (contentTop > toggleContentTop) {
               if (collapse) {
                 content.animate({top: "+=" + sectionHeight + "px"}, 600)
+                $('#lp-pom-box-286').animate({top: "1950px"}, 10)   // Manually move the LMI blue box down
               } else {
                 content.animate({top: "+=" + sectionHeight + "px"}, 10)
               }
