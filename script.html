@@ -1,33 +1,33 @@
 <script type="text/javascript">
 
   (function () { // Immediately invoked function enclosure
-
     //First value should point to highest collapsible content section
+
     var _store = [
       {
-        section: '#lp-pom-block-160',   // Insight collapsible section
-        content: '#lp-pom-box-322',     // Insight box
-        button: '#lp-pom-button-245'    // Insight button
+        section: '#lp-pom-block-160', //insight story section
+        content: '#lp-pom-box-651', //insight box
+        button: '#lp-pom-button-741' //insight button
       },
       {
-        section: '#lp-pom-block-335',
-        content: '#lp-pom-box-337',
-        button: '#lp-pom-button-277'
+        section: '#lp-pom-block-667', //Outcome Driven story section
+        content: '#lp-pom-box-694', //outcome driven box
+        button: '#lp-pom-button-461' //outcome driven button
       },
       {
-        section: '#lp-pom-block-340',
-        content: '#lp-pom-box-342',
-        button: '#lp-pom-button-278'
+        section: '#lp-pom-block-466', //practical results story section
+        content: '#lp-pom-box-742', //practical results box
+        button: '#lp-pom-button-462' //practical results button
       },
       {
-        section: '#lp-pom-block-356',
-        content: '#lp-pom-box-357',
-        button: '#lp-pom-button-275'
+        section: '#lp-pom-block-640', //public service story section
+        content: '#lp-pom-box-744', // public service box
+        button: '#lp-pom-button-464' // public service button
       },
       {
-        section: '#lp-pom-block-352',
-        content: '#lp-pom-box-353',
-        button: '#lp-pom-button-276'
+        section: '#lp-pom-block-624', // superior value story section
+        content: '#lp-pom-box-745', // superior value box
+        button: '#lp-pom-button-465' // superior value button
       }
     ];
 
@@ -90,6 +90,7 @@
       }
 
       //Run moveStuff to adjust content on load
+      console.log('Running moveStuff')
       moveStuff();
 
       var hide = function () {
