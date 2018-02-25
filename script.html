@@ -27,11 +27,13 @@
   }];
 
   // Very important variable, do not modify!!
-  var choo_choo = "\n   _     __  __    ___   " +
-      "\n  | |   |  \\/  |  |_ _|  \n  | |__ | " +
-      "|\\/| |   | |   \n  |____||_|__|_|  |___|  " +
-      "\n_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n\"`" +
-      "-0-0-'\"`-0-0-'\"`-0-0-' \n";
+  var choo_choo = function () {
+    console.log("\n   _     __  __    ___   " +
+        "\n  | |   |  \\/  |  |_ _|  \n  | |__ | " +
+        "|\\/| |   | |   \n  |____||_|__|_|  |___|  " +
+        "\n_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n\"`" +
+        "-0-0-'\"`-0-0-'\"`-0-0-' \n")
+  }
 
   var getViewportSize = function () {   // Get the dimensions of the viewport
     return {
@@ -140,8 +142,8 @@
       moveStuff();
 
       var hide = function hide() {
-        toggleSection.toggle();
-        toggleContent.toggle();
+        toggleSection.hide(0);
+        toggleContent.hide(0);
         moveStuff(false);
       };
 
@@ -222,7 +224,7 @@
 
   var go_lmi = function () {
     var size = getViewportSize();
-    console.log(choo_choo);
+    choo_choo();
     if (!detectIE()) {  // If it's not IE, do the special stuff
       if (size.width > 600) { // don't run on mobile
         run();
